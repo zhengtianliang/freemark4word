@@ -1,5 +1,6 @@
 package com.zheng.controller;
 
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -82,17 +86,30 @@ public class TestController {
 
     }
 
+    /**
+     * @author: ZhengTianLiang
+     * @date: 2022/05/18 23:24
+     * @desc: biao.ftl 是正常的结果
+     */
     @GetMapping(value = "/test3")
     public void testExport3(HttpServletResponse response){
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("id", "1901030001");
-        dataModel.put("date", "2019年 08 月11 日");
-        dataModel.put("company", "国网山东省电力公司XXX供电公司");
-        dataModel.put("bbb", "转账");
-        dataModel.put("amount", "壹仟贰佰陆拾捌元零贰分");
+        dataModel.put("id", "1901030121212001");
+        dataModel.put("date", "2019年 08 1月11 日");
+        dataModel.put("company", "国网山东123省电力公司XXX供电公司");
+        dataModel.put("bbb", "转账2123");
+        dataModel.put("amount", "壹仟贰佰陆123123123拾捌元零贰分");
         dataModel.put("price", "1268.02");
-        dataModel.put("content", "2019年7月XXXXXXXXXXXX供电公司公司XXXXXXXXXXXX供电公司公司上差旅费垫付款");
-        dataModel.put("aaa", "d");
+        dataModel.put("content", "2019年7月XXXXX");
+        dataModel.put("ddd", "转账2");
+//        dataModel.put("id", "1");
+//        dataModel.put("date", "1");
+//        dataModel.put("company", "1");
+//        dataModel.put("bbb", "1");
+//        dataModel.put("amount", "1");
+//        dataModel.put("price", "1");
+//        dataModel.put("content", "1");
+//        dataModel.put("aaa", "1");
 
         response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-Disposition", "attachment; filename=books.doc");
@@ -101,7 +118,9 @@ public class TestController {
         Template template = null;
         try {
 //            template = wordConfiguration.getTemplate("document.ftl", "utf-8");
-            template = wordConfiguration.getTemplate("zheng33.ftl", "utf-8");
+//            template = wordConfiguration.getTemplate("test5.ftl", "utf-8");
+//            template = wordConfiguration.getTemplate("biao.ftl", "utf-8");
+            template = wordConfiguration.getTemplate("msg.ftl", "utf-8");
             template.process(dataModel, response.getWriter());//response的Writer不需要我们手动关，tomcat会帮我们关的
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,5 +128,21 @@ public class TestController {
             System.out.println("有何错了");
         }
 
+    }
+
+    @GetMapping(value = "/test4")
+    public void testExport4(HttpServletResponse response){
+//        KVObject bizObject = KVObject.newKVObject();
+//        bizObject.with("id", receiptNo)
+//                .with("date", new SimpleDateFormat("yyyy年MM月dd日").format(new Date()))
+//                .with("company", vo.getOrgName()).with("style", "转账")
+//                .with("amount", money)
+//                .with("price", new DecimalFormat("0.00#").format(totalAmount))
+//                .with("content", content)
+//                .with("fil56eName", fileName);
+//        Configuration configuration = new Configuration(new freemarker.template.Version("2.3.23"));
+//        configuration.setDefaultEncoding("utf-8");
+//        configuration.setTemplateLoader(new ClassTemplateLoader(WebMonthlyBillEnclosureController.class.getClassLoader(), "/files/"));
+//        Template template = configuration.getTemplate("receipt.ftl", "utf-8");
     }
 }
