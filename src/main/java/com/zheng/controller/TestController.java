@@ -119,8 +119,8 @@ public class TestController {
         try {
 //            template = wordConfiguration.getTemplate("document.ftl", "utf-8");
 //            template = wordConfiguration.getTemplate("test5.ftl", "utf-8");
-//            template = wordConfiguration.getTemplate("biao.ftl", "utf-8");
-            template = wordConfiguration.getTemplate("msg.ftl", "utf-8");
+            template = wordConfiguration.getTemplate("biao.ftl", "utf-8");
+//            template = wordConfiguration.getTemplate("msg.ftl", "utf-8");
             template.process(dataModel, response.getWriter());//response的Writer不需要我们手动关，tomcat会帮我们关的
         } catch (Exception e) {
             e.printStackTrace();
